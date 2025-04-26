@@ -73,7 +73,7 @@ impl Shell {
     pub fn exec(&mut self) {
         // 设置前台进程组
         unsafe {
-            libc::tcsetpgrp(libc::STDIN_FILENO, std::process::id() as i32);
+            libc::ioctl(libc::STDIN_FILENO, libc::TIOCSCTTY, 0);
         };
 
         // 开启终端raw模式
