@@ -74,6 +74,8 @@ impl Shell {
         // 设置前台进程组
         unsafe {
             libc::ioctl(libc::STDIN_FILENO, libc::TIOCSCTTY, 0);
+            libc::tcsetpgrp(libc::STDIN_FILENO, std::process::id() as i32);
+
         };
 
         // 开启终端raw模式
